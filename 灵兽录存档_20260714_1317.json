@@ -1,0 +1,293 @@
+{
+  "version": 1,
+  "player": {
+    "level": 5,
+    "exp": 238,
+    "gold": 5000,
+    "soul": 500,
+    "mat": 50,
+    "petExp": 0
+  },
+  "currentMapId": "village",
+  "exploring": false,
+  "tickMs": 2400,
+  "activePetId": "mrk6kqe8d9xgyd",
+  "pets": [
+    {
+      "id": "mrk6kqe8d9xgyd",
+      "nickname": null,
+      "baseName": "蛇",
+      "name": "蛇",
+      "tier": "normal",
+      "isBaby": false,
+      "mapMult": 1,
+      "level": 4,
+      "exp": 16,
+      "growth": 1,
+      "talent": { "name": "低", "mult": 0.85 },
+      "base": { "hp": 26, "atk": 6, "def": 3, "spd": 8 },
+      "skills": [{ "cat": "atk", "name": "噬咬", "mult": 1.7 }],
+      "caughtAt": 1784005101728
+    },
+    {
+      "id": "test-normal-cat",
+      "nickname": null,
+      "baseName": "猫",
+      "name": "猫",
+      "tier": "normal",
+      "isBaby": false,
+      "mapMult": 1,
+      "level": 5,
+      "exp": 0,
+      "growth": 1,
+      "talent": { "name": "中", "mult": 1.0 },
+      "base": { "hp": 26, "atk": 6, "def": 3, "spd": 8 },
+      "skills": [{ "cat": "atk", "name": "撕裂", "mult": 1.6 }],
+      "caughtAt": 1784005101729
+    },
+    {
+      "id": "test-elite-wolf",
+      "nickname": null,
+      "baseName": "狼",
+      "name": "火焰狼",
+      "tier": "elite",
+      "isBaby": false,
+      "mapMult": 1.35,
+      "level": 12,
+      "exp": 0,
+      "growth": 1.5,
+      "talent": { "name": "高", "mult": 1.25 },
+      "base": { "hp": 50, "atk": 10, "def": 6, "spd": 10 },
+      "skills": [
+        { "cat": "atk", "name": "重击", "mult": 1.9 },
+        { "cat": "def", "name": "护盾", "reduce": 0.4 }
+      ],
+      "caughtAt": 1784005101730
+    },
+    {
+      "id": "test-boss-bear",
+      "nickname": null,
+      "baseName": "熊",
+      "name": "苍月熊王",
+      "tier": "boss",
+      "isBaby": false,
+      "mapMult": 1.85,
+      "level": 25,
+      "exp": 0,
+      "growth": 2.2,
+      "talent": { "name": "中", "mult": 1.0 },
+      "base": { "hp": 112, "atk": 20, "def": 11, "spd": 13 },
+      "skills": [
+        { "cat": "atk", "name": "横扫", "mult": 1.55 },
+        { "cat": "atk", "name": "噬咬", "mult": 1.7 },
+        { "cat": "def", "name": "护盾", "reduce": 0.4 },
+        { "cat": "buff", "name": "狂暴", "atkBoost": 0.35, "turns": 2 }
+      ],
+      "caughtAt": 1784005101731
+    },
+    {
+      "id": "test-baby-snake",
+      "nickname": null,
+      "baseName": "冰蟒",
+      "name": "冰蟒",
+      "tier": "boss",
+      "isBaby": true,
+      "mapMult": 2.45,
+      "level": 1,
+      "exp": 0,
+      "growth": 2.64,
+      "talent": { "name": "高", "mult": 1.25 },
+      "base": { "hp": 112, "atk": 20, "def": 11, "spd": 13 },
+      "skills": [
+        { "cat": "atk", "name": "重击", "mult": 1.9 },
+        { "cat": "atk", "name": "穿刺", "mult": 1.5 },
+        { "cat": "def", "name": "护盾", "reduce": 0.4 },
+        { "cat": "heal", "name": "治疗", "pct": 0.22 }
+      ],
+      "caughtAt": 1784005101732
+    }
+  ],
+  "equipment": {
+    "weapon": {
+      "id": "mrk7hu4q5nj0qw",
+      "slot": "weapon",
+      "slotName": "兵刃",
+      "name": "精良朽木剑",
+      "quality": "精良",
+      "stats": { "atk": 6, "def": 0, "hp": 0, "spd": 0 },
+      "itemLevel": 1
+    },
+    "armor": null,
+    "accessory": {
+      "id": "mrk7qboqzffdsb",
+      "slot": "accessory",
+      "slotName": "饰品",
+      "name": "精良兽骨链",
+      "quality": "精良",
+      "stats": { "atk": 0, "def": 0, "hp": 0, "spd": 4 },
+      "itemLevel": 1
+    }
+  },
+  "equipInventory": [
+    {
+      "id": "eq-village-weapon1",
+      "slot": "weapon",
+      "slotName": "兵刃",
+      "name": "粗制朽木剑",
+      "quality": "粗制",
+      "stats": { "atk": 4, "def": 0, "hp": 0, "spd": 0 },
+      "itemLevel": 1
+    },
+    {
+      "id": "eq-village-weapon2",
+      "slot": "weapon",
+      "slotName": "兵刃",
+      "name": "稀有铁枪",
+      "quality": "稀有",
+      "stats": { "atk": 12, "def": 0, "hp": 0, "spd": 0 },
+      "itemLevel": 1
+    },
+    {
+      "id": "eq-village-armor1",
+      "slot": "armor",
+      "slotName": "护甲",
+      "name": "粗制布甲",
+      "quality": "粗制",
+      "stats": { "atk": 0, "def": 3, "hp": 9, "spd": 0 },
+      "itemLevel": 1
+    },
+    {
+      "id": "eq-village-armor2",
+      "slot": "armor",
+      "slotName": "护甲",
+      "name": "精良皮甲",
+      "quality": "精良",
+      "stats": { "atk": 0, "def": 5, "hp": 15, "spd": 0 },
+      "itemLevel": 1
+    },
+    {
+      "id": "eq-bamboo-weapon1",
+      "slot": "weapon",
+      "slotName": "兵刃",
+      "name": "精良青铜刀",
+      "quality": "精良",
+      "stats": { "atk": 10, "def": 0, "hp": 0, "spd": 0 },
+      "itemLevel": 10
+    },
+    {
+      "id": "eq-bamboo-weapon2",
+      "slot": "weapon",
+      "slotName": "兵刃",
+      "name": "稀有青铜刀",
+      "quality": "稀有",
+      "stats": { "atk": 18, "def": 0, "hp": 0, "spd": 0 },
+      "itemLevel": 10
+    },
+    {
+      "id": "eq-bamboo-accessory1",
+      "slot": "accessory",
+      "slotName": "饰品",
+      "name": "粗制玉坠",
+      "quality": "粗制",
+      "stats": { "atk": 0, "def": 0, "hp": 0, "spd": 3 },
+      "itemLevel": 10
+    },
+    {
+      "id": "eq-bamboo-accessory2",
+      "slot": "accessory",
+      "slotName": "饰品",
+      "name": "稀有兽骨链",
+      "quality": "稀有",
+      "stats": { "atk": 0, "def": 0, "hp": 0, "spd": 7 },
+      "itemLevel": 10
+    },
+    {
+      "id": "eq-wild-weapon1",
+      "slot": "weapon",
+      "slotName": "兵刃",
+      "name": "精良铁枪",
+      "quality": "精良",
+      "stats": { "atk": 14, "def": 0, "hp": 0, "spd": 0 },
+      "itemLevel": 20
+    },
+    {
+      "id": "eq-wild-weapon2",
+      "slot": "weapon",
+      "slotName": "兵刃",
+      "name": "稀有铁枪",
+      "quality": "稀有",
+      "stats": { "atk": 24, "def": 0, "hp": 0, "spd": 0 },
+      "itemLevel": 20
+    },
+    {
+      "id": "eq-wild-armor1",
+      "slot": "armor",
+      "slotName": "护甲",
+      "name": "精良铁甲",
+      "quality": "精良",
+      "stats": { "atk": 0, "def": 8, "hp": 22, "spd": 0 },
+      "itemLevel": 20
+    },
+    {
+      "id": "eq-wild-armor2",
+      "slot": "armor",
+      "slotName": "护甲",
+      "name": "稀有铁甲",
+      "quality": "稀有",
+      "stats": { "atk": 0, "def": 12, "hp": 35, "spd": 0 },
+      "itemLevel": 20
+    },
+    {
+      "id": "eq-ice-weapon1",
+      "slot": "weapon",
+      "slotName": "兵刃",
+      "name": "精良玄铁剑",
+      "quality": "精良",
+      "stats": { "atk": 22, "def": 0, "hp": 0, "spd": 0 },
+      "itemLevel": 40
+    },
+    {
+      "id": "eq-ice-weapon2",
+      "slot": "weapon",
+      "slotName": "兵刃",
+      "name": "稀有玄铁剑",
+      "quality": "稀有",
+      "stats": { "atk": 36, "def": 0, "hp": 0, "spd": 0 },
+      "itemLevel": 40
+    },
+    {
+      "id": "eq-secret-weapon1",
+      "slot": "weapon",
+      "slotName": "兵刃",
+      "name": "精良龙鳞刀",
+      "quality": "精良",
+      "stats": { "atk": 30, "def": 0, "hp": 0, "spd": 0 },
+      "itemLevel": 60
+    },
+    {
+      "id": "eq-secret-weapon2",
+      "slot": "weapon",
+      "slotName": "兵刃",
+      "name": "稀有龙鳞刀",
+      "quality": "稀有",
+      "stats": { "atk": 48, "def": 0, "hp": 0, "spd": 0 },
+      "itemLevel": 60
+    }
+  ],
+  "settings": {
+    "autoRefine": true,
+    "keepBaby": true,
+    "keepBoss": true
+  },
+  "log": [
+    { "t": "title", "txt": "欢迎回到《灵兽录》。背包已添加测试装备，请切换到'背包'Tab 查看。" }
+  ],
+  "lastSaveTime": 1784007124280,
+  "playTimeSec": 0,
+  "startedAt": 1784005101728,
+  "stats": {
+    "totalCatches": 4,
+    "totalBattles": 281
+  },
+  "babyCooldownSec": 0
+}
