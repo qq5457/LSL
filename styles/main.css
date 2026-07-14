@@ -75,9 +75,16 @@
   
   main {
     padding:16px 18px;
-    min-height:600px;
-    max-height: 600px;   /* 设置最大高度，让界面固定 */
-    overflow-y: auto;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #tab-explore, #tab-pets, #tab-bag, #tab-settings {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   }
   
   .section-title{
@@ -208,9 +215,10 @@
   .modal-mask{position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:center; justify-content:center; z-index:50; padding:20px;}
   .modal-mask.show{display:flex;}
   .modal-box{
-    background:var(--ink-1); border:1px solid var(--gold-dim); border-radius:10px; max-width:420px; width:100%;
-    padding:20px; box-shadow:var(--shadow); max-height:80vh; overflow-y:auto;
-  }
+      background:var(--ink-1); border:1px solid var(--gold-dim); border-radius:10px; max-width:420px; width:100%;
+      padding:20px; box-shadow:var(--shadow); max-height:80vh; overflow-y:auto;
+      pointer-events:auto;
+    }
   .modal-box h2{font-family:'Noto Serif SC',serif; color:var(--gold); font-size:17px; margin:0 0 4px; letter-spacing:2px;}
   .modal-box .modal-sub{font-size:11px; color:var(--muted); margin-bottom:12px;}
   .harvest-list{display:flex; flex-direction:column; gap:5px; margin-bottom:14px;}
@@ -219,6 +227,32 @@
   .modal-close{width:100%; padding:10px; border-radius:7px; border:1px solid var(--gold-dim); background:rgba(205,164,61,.12); color:var(--gold); font-family:'Noto Serif SC',serif; cursor:pointer; font-size:14px;}
   
   footer.savebar{padding:7px 18px; font-size:10px; color:var(--muted); border-top:1px solid var(--line); display:flex; justify-content:space-between;}
+
+/* 资源行 */
+.res-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  margin-bottom: 14px;
+}
+.res-item {
+  flex: 1 1 calc(25% - 2px);
+  min-width: 60px;
+  background: var(--ink-2);
+  padding: 6px 8px;
+  text-align: center;
+}
+.res-item .rl {
+  font-size: 10.5px;
+  color: var(--muted);
+}
+.res-item .rv {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+  color: var(--gold);
+  font-weight: 700;
+  margin-top: 2px;
+}
   
   .detail-close{position:absolute; top:12px; right:14px; background:none; border:none; color:var(--muted); font-size:20px; cursor:pointer; line-height:1;}
   .detail-name-row{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:10px;}
@@ -233,5 +267,85 @@
   .skill-detail .sname{font-weight:700; font-size:12.5px; color:var(--gold);}
   .skill-detail .sdesc{font-size:11px; color:var(--muted); margin-top:2px;}
   .detail-meta{font-size:11px; color:var(--muted); margin-bottom:10px;}
+
+.grid-container {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--ink-0);
+  padding: 6px 6px 0 6px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+.grid-container.pet-grid {
+  flex: 1;
+  height: 0;
+  min-height: 0;
+  overflow-y: scroll;
+}
+.grid-container.equip-grid {
+  height: 175px;
+  flex-shrink: 0;
+  overflow-y: scroll;
+}
+.grid-container .pet-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 6px;
+  max-height: none;
+  overflow-y: visible;
+}
+.grid-container #equipInv {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 6px;
+}
+
+/* ========== 自定义滚动条 ========== */
+.grid-container {
+  overflow-y: scroll !important;
+}
+.log-area {
+  overflow-y: scroll !important;
+}
+.modal-box {
+  overflow-y: scroll !important;
+}
+.grid-container,
+.log-area,
+.modal-box {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-dim) transparent;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold-dim);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.detail-grid {
+  display: flex !important;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.detail-grid .detail-stat {
+  flex: 1;
+  min-width: 70px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 6px 8px;
+  background: var(--ink-2);
+}
 
   

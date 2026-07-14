@@ -6,7 +6,7 @@
 <title>灵兽录</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="styles/main.css?v=1784040094">
 </head>
 <body>
 
@@ -44,22 +44,26 @@
     </div>
 
     <div id="tab-pets" style="display:none;">
-      <div class="section-title">宠物仓库（点击查看详情）</div>
-      <div class="pet-list" id="petList"></div>
+      <div class="section-title">宠物仓库（点击查看详情）<button class="mini-btn danger" id="btnBatchRefine" style="margin-left:auto;font-size:10px;">批量炼化</button></div>
+      <div class="grid-container pet-grid"><div class="pet-list" id="petList"></div></div>
     </div>
 
     <div id="tab-bag" style="display:none;">
       <div class="section-title">资源</div>
-      <div class="res-grid">
-        <div class="res-cell"><div class="rl">金币</div><div class="rv" id="bagGold">0</div></div>
-        <div class="res-cell"><div class="rl">兽魂</div><div class="rv" id="bagSoul">0</div></div>
-        <div class="res-cell"><div class="rl">装备材料</div><div class="rv" id="bagMat">0</div></div>
-        <div class="res-cell"><div class="rl">宠物经验（可培养用）</div><div class="rv" id="bagPetExp">0</div></div>
+      <div class="res-row" id="bagResources">
+        <div class="res-item"><div class="rl">装备材料</div><div class="rv" id="bagMat">0</div></div>
+        <div class="res-item"><div class="rl">资质丹</div><div class="rv" id="bagPills">0</div></div>
+        <div class="res-item"><div class="rl">资质碎片</div><div class="rv" id="bagFragments">0</div></div>
+        <div class="res-item"><div class="rl">技能石</div><div class="rv" id="bagSkillStone">0</div></div>
+        <div class="res-item"><div class="rl">宠物经验</div><div class="rv" id="bagPetExp">0</div></div>
+        <div class="res-item"><div class="rl">-</div><div class="rv">-</div></div>
+        <div class="res-item"><div class="rl">-</div><div class="rv">-</div></div>
+        <div class="res-item"><div class="rl">-</div><div class="rv">-</div></div>
       </div>
       <div class="section-title">玩家装备</div>
       <div class="equip-slots" id="equipSlots"></div>
-      <div class="section-title">未装备物品（绿色高亮 = 比身上好）</div>
-      <div class="pet-list" id="equipInv"></div>
+      <div class="section-title">未装备物品（绿色高亮 = 比身上好）<button class="mini-btn danger" id="btnBatchDecompose" style="margin-left:auto;font-size:10px;">批量分解</button></div>
+      <div class="grid-container equip-grid"><div class="pet-list" id="equipInv"></div></div>
     </div>
 
     <div id="tab-settings" style="display:none;">
@@ -116,6 +120,52 @@
 
 <div class="modal-mask" id="petDetailModal">
   <div class="modal-box" id="petDetailBox"></div>
+</div>
+
+<div class="modal-mask" id="equipDetailModal">
+  <div class="modal-box" id="equipDetailBox"></div>
+</div>
+
+<!-- 批量炼化弹窗 -->
+<div class="modal-mask" id="batchRefineModal">
+<div class="modal-box">
+<h2>批量炼化</h2>
+<div class="modal-sub">选择要炼化的品阶（主力不会被炼化，宝宝/Boss 会二次确认）</div>
+<div class="harvest-list" id="batchRefineOptions"></div>
+<div style="display:flex;gap:8px;margin-top:12px;">
+<button class="mini-btn primary" id="batchRefineConfirm" style="flex:1;">确认炼化</button>
+<button class="mini-btn" id="batchRefineCancel" style="flex:1;">取消</button>
+</div>
+</div>
+</div>
+<!-- 批量分解弹窗 -->
+<div class="modal-mask" id="batchDecomposeModal">
+<div class="modal-box">
+<h2>批量分解</h2>
+<div class="modal-sub">选择要分解的品质（已穿戴不会被分解）</div>
+<div class="harvest-list" id="batchDecomposeOptions"></div>
+<div style="display:flex;gap:8px;margin-top:12px;">
+<button class="mini-btn primary" id="batchDecomposeConfirm" style="flex:1;">确认分解</button>
+<button class="mini-btn" id="batchDecomposeCancel" style="flex:1;">取消</button>
+</div>
+</div>
+</div>
+
+<!-- 培养弹窗 -->
+<div class="modal-mask" id="trainModal">
+<div class="modal-box">
+<h2>兽魂培养</h2>
+<div class="modal-sub" id="trainInfo">当前兽魂：<b>0</b></div>
+<div style="margin:10px 0;">
+<label>目标等级：<b id="trainTargetLv">1</b></label>
+<input type="range" id="trainSlider" min="1" max="100" value="1" style="width:100%;">
+</div>
+<div class="modal-sub" id="trainCost">消耗：0 兽魂</div>
+<div style="display:flex;gap:8px;margin-top:12px;">
+<button class="mini-btn primary" id="trainConfirm" style="flex:1;">确认培养</button>
+<button class="mini-btn" id="trainCancel" style="flex:1;">取消</button>
+</div>
+</div>
 </div>
 
 <div class="modal-mask" id="harvestModal">
