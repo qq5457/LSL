@@ -36,7 +36,7 @@
     box-shadow:var(--shadow);
     overflow:hidden;
     position:relative;
-    height:600px;
+    height:800px;
     display:flex;
     flex-direction:column;
   }
@@ -279,18 +279,18 @@
   overflow-y: auto;
 }
 .grid-container.pet-grid {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
+  height: 626px;
+  flex-shrink: 0;
+  overflow-y: scroll;
   border: 1px solid var(--line);
   border-radius: 6px;
   background: var(--ink-0);
   padding: 6px;
 }
 .grid-container.equip-grid {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
+  height: 254px;
+  flex-shrink: 0;
+  overflow-y: scroll;
   border: 1px solid var(--line);
   border-radius: 6px;
   background: var(--ink-0);
@@ -332,6 +332,7 @@
 .modal-box {
   overflow-y: auto;
 }
+.grid-container,
 .log-area,
 .modal-box {
   scrollbar-width: thin;
