@@ -50,6 +50,7 @@ async function loadGame() {
     const result = await resp.json();
     if (result.save) {
       data = JSON.parse(result.save);
+      data = sanitizeState(data);
       lib.flashSaveStatus('☁️ 已加载云端存档');
     }
   } catch (e) {
@@ -59,10 +60,23 @@ async function loadGame() {
   if (!data) {
     try {
       const raw = localStorage.getItem(SAVE_KEY);
-      if (raw) data = JSON.parse(raw);
+      if (raw) {
+        data = JSON.parse(raw);
+        data = sanitizeState(data);
+      }
     } catch (e) {}
   }
   return data;
+}
+
+// 加载后修正异常值
+function sanitizeState(st) {
+  if (!st) return st;
+  if (st.startedAt > Date.now() + 86400000) {  // 超过未来1天
+    st.startedAt = Date.now() - 60000;
+    st.playTimeSec = 0;
+  }
+  return st;
 }
 
 function exportSave() {

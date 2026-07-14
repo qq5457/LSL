@@ -249,7 +249,8 @@ $('setKeepBaby').checked = state.settings.keepBaby;
 $('setKeepBoss').checked = state.settings.keepBoss;
 document.querySelectorAll('.speed-opt').forEach(el => el.classList.toggle('active', +el.dataset.v === state.tickMs));
 const totalSec = state.playTimeSec + Math.floor((Date.now() - state.startedAt)/1000);
-$('playTimeTxt').textContent = `游戏时长 ${lib.fmtDuration(totalSec)} 战斗 ${state.stats.totalBattles} 捕获 ${state.stats.totalCatches}`;
+// 防止 startedAt 异常导致负数
+$('playTimeTxt').textContent = `游戏时长 ${lib.fmtDuration(Math.max(0, totalSec))} 战斗 ${state.stats.totalBattles} 捕获 ${state.stats.totalCatches}`;
 // 显示同步 ID
 if (typeof Lingshou.getSyncId === 'function') {
   $('syncIdDisplay').textContent = Lingshou.getSyncId();

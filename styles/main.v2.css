@@ -90,6 +90,9 @@
     min-height:0;
     overflow:hidden;
   }
+  #tab-settings {
+    overflow-y: auto;
+  }
   
   .section-title{
     font-family:'Noto Serif SC',serif; font-weight:700; font-size:14px; color:var(--gold);
