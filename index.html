@@ -104,7 +104,10 @@
       <div class="empty-hint" style="padding:4px 0 0; text-align:left; font-size:10px; color:var(--gold-dim);">
         同步 ID：<b id="syncIdDisplay"></b>
         <button class="mini-btn" id="btnCopySyncId" style="font-size:9px; padding:2px 6px; margin-left:4px;">复制</button>
-        <small style="color:var(--muted); display:block; margin-top:2px;">其他设备填入相同 ID 即可跨设备同步</small>
+      </div>
+      <div class="setting-row" style="margin-top:4px;">
+        <input type="text" id="syncIdInput" style="flex:1; background:var(--ink-2); border:1px solid var(--line); border-radius:4px; padding:4px 8px; color:var(--parchment); font-size:11px;" placeholder="粘贴同步 ID...">
+        <button class="mini-btn primary" id="btnSetSyncId" style="font-size:9px;">切换</button>
       </div>
       <div class="empty-hint" id="playTimeTxt" style="padding:14px 0 0;"></div>
     </div>

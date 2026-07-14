@@ -255,12 +255,20 @@ if (typeof Lingshou.getSyncId === 'function') {
   $('syncIdDisplay').textContent = Lingshou.getSyncId();
 }
 $('btnCopySyncId').onclick = function() {
-  navigator.clipboard.writeText(Lingshou.getSyncId()).then(function() {
-    alert('同步 ID 已复制');
-  }).catch(function() {
-    prompt('手动复制：', Lingshou.getSyncId());
-  });
-};
+    navigator.clipboard.writeText(Lingshou.getSyncId()).then(function() {
+      alert('同步 ID 已复制');
+    }).catch(function() {
+      prompt('手动复制：', Lingshou.getSyncId());
+    });
+  };
+  // 切换同步 ID
+  $('btnSetSyncId').onclick = function() {
+    var newId = $('syncIdInput').value.trim();
+    if (!newId) { alert('请输入同步 ID'); return; }
+    if (!confirm('切换到 ID「' + newId + '」将重新加载存档，确定？')) return;
+    localStorage.setItem('lingshoulu_sync_id', newId);
+    location.reload();
+  };
 };
 lib.renderAll = function() {
 lib.renderMapsGrid(); lib.renderTopBars(); lib.renderActivePet(); lib.renderPetList(); lib.renderBag(); lib.renderSettings();
@@ -314,12 +322,13 @@ const reader = new FileReader();
 reader.onload = () => Lingshou.importSaveFromText(reader.result);
 reader.readAsText(f); e.target.value='';
 };
-$('btnReset').onclick = async () => {
+$('btnReset').onclick = function() {
 if (!confirm('重置？')) return;
-window.stopExploreLoop();
-state = Lingshou.freshState(); Lingshou.ensureActivePet();
-await Lingshou.saveGame(false);
-$('logArea').innerHTML = ''; lib.renderAll();
+if (!confirm('确定重置所有存档？将生成新的同步 ID。')) return;
+var newId = 'sync_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+localStorage.setItem('lingshoulu_sync_id', newId);
+localStorage.removeItem('lingshoulu-save-v1');
+location.reload();
 };
 // ========== 批量炼化弹窗 ==========
 lib.showBatchRefineModal = function() {
