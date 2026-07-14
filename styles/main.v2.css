@@ -279,7 +279,7 @@
   overflow-y: auto;
 }
 .grid-container.pet-grid {
-  height: 626px;
+  height: 502px;
   flex-shrink: 0;
   overflow-y: scroll;
   border: 1px solid var(--line);
