@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""灵兽录 游戏服务器 — 静态文件 + 云存档"""
+"""灵兽录 游戏服务器 — 静态文件 + 云存档（无冲突检测，最后一存胜出）"""
 import http.server
 import json
 import os
@@ -20,21 +20,7 @@ class GameHandler(http.server.SimpleHTTPRequestHandler):
                 device = data.get("device_id", self.client_address[0])
                 save_path = os.path.join(DATA_DIR, f"{device}.json")
                 
-                # 冲突检测：如果云端存档比客户端新，拒绝覆盖
-                client_time = data.get("save_time", 0)
-                existing = {}
-                if os.path.exists(save_path):
-                    with open(save_path, "r", encoding="utf-8") as f:
-                        existing = json.load(f)
-                    cloud_time = existing.get("save_time", 0)
-                    if client_time < cloud_time:
-                        self.send_json({
-                            "ok": False,
-                            "conflict": True,
-                            "error": "云端有更新的存档，请重新加载"
-                        })
-                        return
-                
+                # 无冲突检测，直接覆盖（Obsidian 风格：最后一存胜出）
                 with open(save_path, "w", encoding="utf-8") as f:
                     json.dump(data, f, ensure_ascii=False)
                 self.send_json({"ok": True})

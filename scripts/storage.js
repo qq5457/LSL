@@ -1,60 +1,52 @@
 var Lingshou = Lingshou || {};
 (function(lib) {
 const SAVE_KEY = 'lingshoulu-save-v1';
-// 云存档地址（自动检测）
-const API_BASE = (function(){
-  const host = window.location.host;
-  // 如果通过 /game/ 代理访问，API 路径相同
-  return host;
-})();
+const DEVICE_KEY = 'lingshoulu_sync_id';
 
-// 生成设备标识
-function getDeviceId() {
-  let id = localStorage.getItem('lingshoulu_device');
+// 获取同步 ID：所有设备共享（首次生成后固定，不清除就不会变）
+function getSyncId() {
+  let id = localStorage.getItem(DEVICE_KEY);
   if (!id) {
-    id = 'device_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-    localStorage.setItem('lingshoulu_device', id);
+    id = 'sync_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    localStorage.setItem(DEVICE_KEY, id);
   }
   return id;
 }
 
+// 保存：本地优先（即时响应）+ 云端（静默同步）
 async function saveGame(silent) {
   if (!state) return;
   state.lastSaveTime = Date.now();
-  // 本地存档（兜底）
+  // 本地存档（兜底，秒存）
   try {
     localStorage.setItem(SAVE_KEY, JSON.stringify(state));
   } catch (e) { console.error('本地存档失败', e); }
-  // 云存档
+  // 云端存档（静默同步，不阻塞）
   try {
-    const resp = await fetch('/api/save', {
+    await fetch('/api/save', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        device_id: getDeviceId(),
+        device_id: getSyncId(),
         save: JSON.stringify(state),
         save_time: state.lastSaveTime || Date.now()
       })
     });
-    const saveResult = await resp.json();
-    if (saveResult.conflict) {
-      console.warn('云存档冲突，另一设备有更新');
-      lib.flashSaveStatus('⚠️ 存档冲突，请刷新页面加载最新存档');
-      return false;
-    }
-    lib.flashSaveStatus((silent ? '☁️ 已云端存档 ' : '☁️ 已云端存档 ') + lib.nowTime());
+    if (!silent) lib.flashSaveStatus('☁️ 已同步存档 ' + lib.nowTime());
   } catch (e) {
-    console.error('云存档失败', e);
-    lib.flashSaveStatus((silent ? '已本地存档 ' : '已本地存档 ') + lib.nowTime() + '（云不可用）');
+    console.error('云同步失败', e);
+    if (!silent) lib.flashSaveStatus('已本地存档 ' + lib.nowTime() + '（云不可用）');
   }
   return true;
 }
 
+// 加载：云端优先（拿到所有设备的最新进度）→ 本地兜底
 async function loadGame() {
   let data = null;
-  // 优先加载云存档
+  const syncId = getSyncId();
+  // 云端
   try {
-    const resp = await fetch('/api/load?device_id=' + getDeviceId());
+    const resp = await fetch('/api/load?device_id=' + syncId);
     const result = await resp.json();
     if (result.save) {
       data = JSON.parse(result.save);
@@ -63,7 +55,7 @@ async function loadGame() {
   } catch (e) {
     console.log('云存档不可用，改读本地');
   }
-  // 兜底：本地存档
+  // 本地兜底
   if (!data) {
     try {
       const raw = localStorage.getItem(SAVE_KEY);
@@ -91,14 +83,22 @@ function exportSave() {
   }
 }
 
+// 设置页：绑定同步 ID 显示和登录操作
+lib.setupSyncUI = function() {
+  const syncId = getSyncId();
+  const el = document.getElementById('syncIdDisplay');
+  if (el) el.textContent = syncId;
+};
+
 lib.saveGame = saveGame;
 lib.loadGame = loadGame;
 lib.exportSave = exportSave;
+lib.getSyncId = getSyncId;
 lib.flashSaveStatus = function(txt) {
   const el = document.getElementById('saveStatus');
   if (el) {
     el.textContent = txt;
-    el.style.color = txt.indexOf('⚠') === 0 ? 'var(--red)' : '';
+    el.style.color = txt.indexOf('⚠️') === 0 ? 'var(--red)' : '';
   }
 };
 })(Lingshou);

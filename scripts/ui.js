@@ -250,6 +250,17 @@ $('setKeepBoss').checked = state.settings.keepBoss;
 document.querySelectorAll('.speed-opt').forEach(el => el.classList.toggle('active', +el.dataset.v === state.tickMs));
 const totalSec = state.playTimeSec + Math.floor((Date.now() - state.startedAt)/1000);
 $('playTimeTxt').textContent = `游戏时长 ${lib.fmtDuration(totalSec)} 战斗 ${state.stats.totalBattles} 捕获 ${state.stats.totalCatches}`;
+// 显示同步 ID
+if (typeof Lingshou.getSyncId === 'function') {
+  $('syncIdDisplay').textContent = Lingshou.getSyncId();
+}
+$('btnCopySyncId').onclick = function() {
+  navigator.clipboard.writeText(Lingshou.getSyncId()).then(function() {
+    alert('同步 ID 已复制');
+  }).catch(function() {
+    prompt('手动复制：', Lingshou.getSyncId());
+  });
+};
 };
 lib.renderAll = function() {
 lib.renderMapsGrid(); lib.renderTopBars(); lib.renderActivePet(); lib.renderPetList(); lib.renderBag(); lib.renderSettings();
